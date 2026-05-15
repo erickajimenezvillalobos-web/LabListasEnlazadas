@@ -1,0 +1,83 @@
+#ifndef HISTORIAL_DOBLE_H
+#define HISTORIAL_DOBLE_H
+
+#include "NodoHistorial.h"
+
+
+
+namespace EIF201 {
+
+
+	class HistorialDoble {
+	private:
+
+		NodoHistorial* cabeza; //primer nodo de la lista
+		NodoHistorial* cola;   //último nodo de la lista
+		int           cantidad; //cantidad de nodos actuales
+
+
+	public:
+		//constructor y destructor 
+
+		HistorialDoble();
+		~HistorialDoble();
+
+		//Inserción
+		//Agrega una canción al inicio (nueva caneza)
+		void insertarAlInicio(const string& cancion);
+
+		//Agrega una cancion al final (nueva cola)
+		void insertarAlFinal(const string& cancion);
+
+		//Inserta en la posicion indicada (0-indexed).
+		//Si pos <= 0, inserta al inicio. Si pos >= cantidad, inserta al final.
+		void insertarEnPosicion(const string& cancion, int pos);
+
+		//Inserta 'nueva' justo antes de la primera  ocurrrencia de 'referencia'.
+		//Retorna false si 'referencia' no existe.
+		bool insertarAntesDe(const string& referencia, const string& nueva);
+
+		//Inserta 'nueva' justo después de la primera  ocurrrencia de 'referencia'.
+		//Retorna false si 'referencia' no existe.
+		bool insertarDespuesDe(const string& referencia, const string& nueva);
+
+		//Busqueda
+		//Retorna true si el nombre de canción existe en el historial.
+		bool existeCancion(const string& cancion) const;
+
+		//Retorna la posición (0-indexed) de la primera ocurrencia.
+		//Retorna -1 si no se encuentra.
+		int obtenerPosicion(const string& cancion) const;
+
+		//Retorna el nombre de la canción en la posición indicada.
+		//Retorna "" si la posición esta fuera de rango.
+		string obtenerEnPosicion(int pos) const;
+
+		//Busca desde el final. Retorna la posición contando desde la cola.
+		//Útil para encontrar la última aparición de una canción.
+
+		int obtenerPosicionDesdeElFinal(const string& cancion) const;
+
+		//Eliminación
+		//Elimina la primera ocurrencia de una canción por nombre.
+		bool eliminarPrimera(const string& cancion);
+
+		bool eliminarUltima(const string& cancion);
+
+		bool eliminarEnPosicion(int pos);
+
+		bool eliminarCabeza();
+
+		bool eliminarCola();
+
+		void imprimirCronologico() const;
+
+		void imprimirInverso() const;
+
+		int getCantidad() const;
+
+		bool estaVacia() const;
+
+	};
+}
+#endif 
